@@ -1,5 +1,3 @@
-import { parseHTML } from "linkedom";
-
 type ReservationData = {
 	time: Date;
 	room: string;
@@ -46,30 +44,34 @@ function getReservationDataFromAriaLabel(ariaLabel: string) {
 }
 
 export async function test() {
-	const response = await fetch(
-		"https://libcal.lib.utexas.edu/spaces?lid=16542&gid=35011",
-	);
-	const text = await response.text();
-	const { document } = parseHTML(text);
-
-	// const aTags = document.querySelectorAll("a[aria-label][title]");
-	const aTags = document.querySelectorAll("a[title]");
-	if (!aTags) {
-		throw new Error("a tags not found");
-	}
-
-	console.log("A TAGS:", aTags);
-	const data: Record<number, ReservationData> = {};
-	aTags.forEach((aTag: Element) => {
-		const ariaLabel = aTag.getAttribute("aria-label");
-		const title = aTag.getAttribute("title");
-		if (!ariaLabel || !title) {
-			throw new Error("aria-label or title not found");
-		}
-		const reservationData = getReservationDataFromAriaLabel(ariaLabel);
-		if (!reservationData) return;
-		data[reservationData.time.getTime()] = reservationData;
-	});
-
-	return data;
+	return "test";
 }
+
+// export async function test() {
+// 	const response = await fetch(
+// 		"https://libcal.lib.utexas.edu/spaces?lid=16542&gid=35011",
+// 	);
+// 	const text = await response.text();
+// 	const { document } = parseHTML(text);
+
+// 	// const aTags = document.querySelectorAll("a[aria-label][title]");
+// 	const aTags = document.querySelectorAll("a[title]");
+// 	if (!aTags) {
+// 		throw new Error("a tags not found");
+// 	}
+
+// 	console.log("A TAGS:", aTags);
+// 	const data: Record<number, ReservationData> = {};
+// 	aTags.forEach((aTag: Element) => {
+// 		const ariaLabel = aTag.getAttribute("aria-label");
+// 		const title = aTag.getAttribute("title");
+// 		if (!ariaLabel || !title) {
+// 			throw new Error("aria-label or title not found");
+// 		}
+// 		const reservationData = getReservationDataFromAriaLabel(ariaLabel);
+// 		if (!reservationData) return;
+// 		data[reservationData.time.getTime()] = reservationData;
+// 	});
+
+// 	return data;
+// }
