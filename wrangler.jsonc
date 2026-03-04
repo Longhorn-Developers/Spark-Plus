@@ -1,38 +1,25 @@
-/**
- * For more details on how to configure Wrangler, refer to:
- * https://developers.cloudflare.com/workers/wrangler/configuration/
- */
-/**
- * For more details on how to configure Wrangler, refer to:
- * https://developers.cloudflare.com/workers/wrangler/configuration/
- */
+// + ----------------------------------------------------------------- +
+// |   DO NOT TOUCH!!! THIS IS REALLY CONFUSING AND ANNOYING TO FIX.   |
+// + ----------------------------------------------------------------- +
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "spark-plus",
 	"main": "src/index.ts",
 	"compatibility_date": "2025-03-10",
 	"compatibility_flags": ["nodejs_compat"],
+
+	// + ---------------------------------------------------------------------------------------------------------- +
+	// |   NOTE: ONLY ADD TO THE MIGRATIONS. If you alter the history, cloudflare will get very mad and confused.   |
+	// + ---------------------------------------------------------------------------------------------------------- +
 	"migrations": [
 		{
 			"tag": "v1",
 			"new_sqlite_classes": ["BasicTester"],
 		},
 		{
-			"tag": "v2",
-			// "renamed_classes": [
-			// 	{
-			// 		"from": "MyMCP",
-			// 		"to": "BasicTester",
-			// 	},
-			// ],
-		},
-		{
-			"tag": "v3",
+			"tag": "v3", // v2 is MESSED UP. Don't worry about it. This is correct.
 			"new_sqlite_classes": ["OtherServer"],
 		},
-		// {
-		// 	"tag": "v4","
-		// },
 	],
 	"durable_objects": {
 		"bindings": [

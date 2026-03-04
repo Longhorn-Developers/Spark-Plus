@@ -1,25 +1,18 @@
-import { McpAgent } from "agents/mcp";
 import {
 	BasicTester,
 	metadata as basicTesterMetadata,
 } from "./agents/basic-tester";
 import { OtherServer, metadata as otherMetadata } from "./agents/other";
+import { AgentMetadata } from "./shared/types";
+export { BasicTester, OtherServer }; // Required for cloudflare behind the scenes functionality.
 
-// const AGENTS = [OtherServer, BasicTester];
-const AGENTS = [basicTesterMetadata, otherMetadata] as {
-	title: string;
-	version: string;
-	url_prefix: string;
-	binding: string;
-	server: typeof McpAgent;
-}[];
-
+// An array of all the active agents. To add a new agent, add the metadata to this array.
+const AGENTS = [basicTesterMetadata, otherMetadata] as AgentMetadata[];
 export default {
 	fetch(request: Request, env: Env, ctx: ExecutionContext) {
 		const url = new URL(request.url);
 
 		for (const agent of AGENTS) {
-			console.log("prefix: ", agent.url_prefix);
 			if (url.pathname === agent.url_prefix) {
 				return agent.server
 					.serve(agent.url_prefix, { binding: agent.binding })
@@ -30,5 +23,3 @@ export default {
 		return new Response("Not found!!", { status: 404 });
 	},
 };
-
-export { BasicTester, OtherServer };

@@ -1,54 +1,28 @@
-import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { McpAgent } from "agents/mcp";
+import { z } from "zod";
+import { defineAgent } from "../../shared/agent-creator";
+import { defineTool } from "../../shared/types";
 
-// export class OtherServer extends McpAgentWrapper {
-// 	title = "Other Server";
-// 	version = "1.0.0";
-// 	binding = "MCP_OBJECT";
-// 	url_prefix = "/other";
-// 	tools = [];
-
-// 	// server = new McpServer({
-// 	// 	name: "Other Server",
-// 	// 	version: "1.0.0",
-// 	// });
-
-// 	// async init() {
-// 	// 	// Simple addition tool
-// 	// 	this.server.tool("foo", {}, async () => {
-// 	// 		return {
-// 	// 			content: [{ type: "text", text: "foo" }],
-// 	// 		};
-// 	// 	});
-// 	// }
-// }
-
-export class OtherServer extends McpAgent {
-	// title = "Other Server";
-	// version = "1.0.0";
-	// binding = "MCP_OBJECT";
-	// url_prefix = "/other";
-	// tools = [];
-
-	server = new McpServer({
-		name: "Other Server",
-		version: "1.0.0",
-	});
-
-	async init() {
-		// Simple addition tool
-		this.server.tool("foo", {}, async () => {
-			return {
-				content: [{ type: "text", text: "foo" }],
-			};
-		});
-	}
-}
-
-export const metadata = {
-	title: "Other Server",
+const { AgentClass: OtherServer, metadata } = defineAgent({
+	name: "Other Server",
 	version: "1.0.0",
 	binding: "other",
 	url_prefix: "/other",
-	server: OtherServer,
-};
+	tools: [
+		defineTool({
+			name: "foo",
+			inputSchema: { name: z.number() },
+			function: async ({ name }) => ({
+				content: [{ type: "text", text: name.toExponential().toString() }],
+			}),
+		}),
+		defineTool({
+			name: "Capitalize",
+			inputSchema: { name: z.string() },
+			function: async ({ name }) => ({
+				content: [{ type: "text", text: name.toUpperCase() }],
+			}),
+		}),
+	],
+});
+
+export { metadata, OtherServer };
