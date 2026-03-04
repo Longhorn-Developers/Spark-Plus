@@ -14,17 +14,21 @@
 	"compatibility_flags": ["nodejs_compat"],
 	"migrations": [
 		{
-			"new_sqlite_classes": ["BasicTester", "OtherServer"],
 			"tag": "v1",
+			"new_sqlite_classes": ["BasicTester"],
 		},
 		{
 			"tag": "v2",
 			"renamed_classes": [
 				{
 					"from": "MyMCP",
-					"to": "OtherServer",
+					"to": "BasicTester",
 				},
 			],
+		},
+		{
+			"tag": "v3",
+			"new_sqlite_classes": ["OtherServer"],
 		},
 	],
 	"durable_objects": {
