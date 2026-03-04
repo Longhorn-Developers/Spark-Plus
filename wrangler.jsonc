@@ -15,13 +15,24 @@
 	"migrations": [
 		{
 			"tag": "v1",
-			"new_sqlite_classes": ["MCP_OBJECT", "RANDOM"],
+			"new_sqlite_classes": ["BasicTester"],
 		},
 		{
 			"tag": "v2",
-			"deleted_classes": ["MCP_OBJECT", "RANDOM"],
-			"new_sqlite_classes": ["BasicTester", "OtherServer"],
+			// "renamed_classes": [
+			// 	{
+			// 		"from": "MyMCP",
+			// 		"to": "BasicTester",
+			// 	},
+			// ],
 		},
+		{
+			"tag": "v3",
+			"new_sqlite_classes": ["OtherServer"],
+		},
+		// {
+		// 	"tag": "v4","
+		// },
 	],
 	"durable_objects": {
 		"bindings": [
