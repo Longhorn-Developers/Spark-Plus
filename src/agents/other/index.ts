@@ -48,7 +48,7 @@ export class OtherServer extends McpAgent {
 export const metadata = {
 	title: "Other Server",
 	version: "1.0.0",
-	binding: "MCP_OBJECT",
+	binding: "other",
 	url_prefix: "/other",
 	server: OtherServer,
 };

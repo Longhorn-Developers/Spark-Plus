@@ -142,7 +142,7 @@ export class BasicTester extends McpAgent {
 export const metadata = {
 	title: "Basic Tester",
 	version: "1.0.0",
-	binding: "RANDOM",
+	binding: "basic",
 	url_prefix: "/basic-tester",
 	server: BasicTester,
 };
