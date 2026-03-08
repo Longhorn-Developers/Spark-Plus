@@ -1,19 +1,11 @@
 import type { ToolCallback } from "@modelcontextprotocol/sdk/server/mcp.js";
-import type {
-	AnySchema,
-	ZodRawShapeCompat,
-} from "@modelcontextprotocol/sdk/server/zod-compat.js";
+import type { AnySchema, ZodRawShapeCompat } from "@modelcontextprotocol/sdk/server/zod-compat.js";
 import type { ToolAnnotations } from "@modelcontextprotocol/sdk/types.js";
 import { McpAgent } from "agents/mcp";
 
 export type Version = `${number}.${number}.${number}`;
 
-export type MCPResponseType =
-	| "text"
-	| "audio"
-	| "image"
-	| "recourse"
-	| "recourse_link";
+export type MCPResponseType = "text" | "audio" | "image" | "recourse" | "recourse_link";
 
 /**
  * The type for a MCP response. Useful for external tool functions that return a complete response.

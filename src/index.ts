@@ -1,7 +1,4 @@
-import {
-	BasicTester,
-	metadata as basicTesterMetadata,
-} from "./agents/basic-tester";
+import { BasicTester, metadata as basicTesterMetadata } from "./agents/basic-tester";
 import { OtherServer, metadata as otherMetadata } from "./agents/other";
 import { AgentMetadata } from "./shared/types";
 export { BasicTester, OtherServer }; // Required for cloudflare behind the scenes functionality.
