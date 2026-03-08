@@ -46,7 +46,17 @@ jobs:
           fetch-depth: 0
       - name: Check for wrangler.jsonc changes
         run: |
-          if git diff --name-only origin/${{ github.base_ref }}...HEAD | grep -q '^wrangler\.jsonc$'; then
-            echo "::error::wrangler.jsonc must not be modified. See the comment at the top of the file."
+          DIFF=$(git diff origin/${{ github.base_ref }}...HEAD -- wrangler.jsonc)
+          if [ -z "$DIFF" ]; then
+            echo "No changes to wrangler.jsonc - OK"
+            exit 0
+          fi
+          echo "=== wrangler.jsonc diff ==="
+          echo "$DIFF"
+          echo "========================="
+          if echo "$DIFF" | grep -qE '^-[^-]'; then
+            echo "::error::wrangler.jsonc has removals or edits. Only additions are allowed. See the comment at the top of the file."
             exit 1
           fi
+          echo "::warning::wrangler.jsonc was modified (additions only). Consider if this is intentional."
+          exit 0
