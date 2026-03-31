@@ -11,7 +11,8 @@
 		"start": "wrangler dev",
 		"deploy": "wrangler deploy",
 		"cf-typegen": "wrangler types",
-		"type-check": "tsc --noEmit"
+		"type-check": "tsc --noEmit",
+		"experts:search": "node scripts/utexas-experts-search.mjs"
 	},
 	"dependencies": {
 		"agents": "^0.5.0",
