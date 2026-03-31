@@ -6,7 +6,12 @@ export default tseslint.config(
 	eslint.configs.recommended,
 	...tseslint.configs.recommended,
 	{
-		ignores: ["worker-configuration.d.ts", "node_modules/", "dist/"],
+		ignores: [
+			"worker-configuration.d.ts",
+			"node_modules/",
+			"dist/",
+			".wrangler/",
+		],
 	},
 	{
 		files: ["**/*.ts", "**/*.tsx"],

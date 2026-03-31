@@ -57,7 +57,8 @@ export function defineMcpServer(config: McpConfig) {
 
 		async init() {
 			for (const tool of config.tools) {
-				this.server.registerTool(tool.name, tool.config, tool.cb);
+				// Bind callbacks so tools can access the agent runtime (`this`) when needed.
+				this.server.registerTool(tool.name, tool.config, tool.cb.bind(this));
 			}
 		}
 	};

@@ -1,4 +1,8 @@
 import { BasicTester, basicTesterData } from "./servers/basic-tester/main";
+import {
+	GrantsResearchServer,
+	grantsResearchData,
+} from "./servers/grants-research/main";
 import { OtherServer, otherData } from "./servers/other/main";
 
 import { McpServerMetadata } from "./shared/general-types";
@@ -6,7 +10,11 @@ import { McpServerMetadata } from "./shared/general-types";
 // + ------------------------------------------------------------------------------------------------ +
 // |   An array of all the active MCP servers. To add a new MCP server, add the metadata to this array.   |
 // + ------------------------------------------------------------------------------------------------ +
-const MCP_SERVERS = [basicTesterData, otherData] as McpServerMetadata[];
+const MCP_SERVERS = [
+	basicTesterData,
+	otherData,
+	grantsResearchData,
+] as McpServerMetadata[];
 
 export default {
 	fetch(request: Request, env: Env, ctx: ExecutionContext) {
@@ -27,4 +35,4 @@ export default {
 // + ------------------------------------------------------------- +
 // |   NOTE: Update this with all the MCP servers' class exports   |
 // + ------------------------------------------------------------- +
-export { BasicTester, OtherServer }; // Required for cloudflare behind the scenes functionality.
+export { BasicTester, OtherServer, GrantsResearchServer }; // Required for cloudflare behind the scenes functionality.

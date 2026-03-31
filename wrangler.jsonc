@@ -20,6 +20,10 @@
 			"tag": "v3", // v2 is MESSED UP. Don't worry about it. This is correct.
 			"new_sqlite_classes": ["OtherServer"],
 		},
+		{
+			"tag": "v4",
+			"new_sqlite_classes": ["GrantsResearchServer"],
+		},
 	],
 	"durable_objects": {
 		"bindings": [
@@ -30,6 +34,10 @@
 			{
 				"class_name": "OtherServer",
 				"name": "other",
+			},
+			{
+				"class_name": "GrantsResearchServer",
+				"name": "grantsResearch",
 			},
 		],
 	},

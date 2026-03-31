@@ -41,11 +41,38 @@ This project uses **Streamable HTTP**, not stdio:
 3. In the Inspector, choose **“Enter URL”** (do not use “Run command (stdio)”).
 4. Enter a server URL, e.g. `http://localhost:8787/basic-tester`, then Connect and List tools.
 
+## Grants Research Budget + TTL Policy
+
+The `grants-research` server enforces strict Firecrawl usage guardrails:
+
+- **Lifetime hard cap:** at most `500` pages can be fetched across all runs.
+- **Monthly freshness window:** snapshots are considered fresh for `30` days.
+- **Conservative early refresh:** before 30 days, refresh is only allowed when:
+  - at least `14` days have passed since last refresh, and
+  - enough budget remains for a minimum run.
+- **Early refresh run cap:** at most `2` pages per run.
+
+Each tool response exposes budget metadata:
+
+- `pages_remaining`
+- `pages_used_this_refresh` (for refresh calls)
+- `refresh_decision_reason`
+- `fresh_until`
+
+`refresh_decision_reason` values:
+
+- `fresh_cache` — skipped because cache is still fresh
+- `early_refresh` — allowed limited refresh before monthly TTL
+- `monthly_refresh` — regular refresh after monthly staleness
+- `budget_low` — skipped because remaining budget is below run threshold
+- `budget_exhausted` — skipped because lifetime budget is depleted
+
 ## Scripts
 
 | Command              | Purpose                                       |
 | -------------------- | --------------------------------------------- |
 | `npm run dev`        | Local development                             |
+| `npm run test`       | Budget/TTL policy tests                       |
 | `npm run cf-typegen` | Regenerate Worker types after binding changes |
 | `npm run type-check` | TypeScript check                              |
 | `npm run lint`       | Lint; `npm run lint:fix` to fix               |
